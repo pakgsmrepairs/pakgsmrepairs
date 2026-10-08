@@ -1,0 +1,17 @@
+PAK GSM REPAIR PRO V17 - CLOUD BACKUP
+
+Cloud is preconfigured in cloud-config.js and also embedded in index.html for file:// / content:// WebView use.
+
+V17 behavior:
+- Cloud connection test uses JSONP.
+- Every successful local customer save/update/payment/delete queues a cloud snapshot.
+- Customer device photos are included.
+- File Vault files are included.
+- Settings are included.
+- The server stores the latest complete snapshot per device as device_<deviceId>.json in the owner Drive folder.
+- Cloud backup is automatic; no manual checkbox is required.
+
+Owner Drive folder:
+Pak GSM Repair Update 3.1 - Cloud Backups
+
+Do not expose or change the private API key in a public repository.

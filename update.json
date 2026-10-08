@@ -1,0 +1,11 @@
+{
+  "latestVersion": "3.3",
+  "updateUrl": "./",
+  "releasedAt": "2026-10-08",
+  "notes": [
+    "Added built-in App Update checker and Update Now button.",
+    "Improved Service Worker versioning and update handling.",
+    "Added network-first update metadata so future versions can be detected without reinstalling the APK.",
+    "Customer data, photos, File Vault, Products and cloud backup behavior remain preserved."
+  ]
+}

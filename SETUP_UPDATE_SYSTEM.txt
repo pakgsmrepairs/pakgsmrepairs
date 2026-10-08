@@ -1,0 +1,18 @@
+PAK GSM REPAIR UPDATE 3.3 - FUTURE APP UPDATE SYSTEM
+
+1. Host the app at a public HTTPS URL.
+2. The APK/TWA should point to that HTTPS PWA URL.
+3. For a future web update (3.4, 3.5, etc.):
+   - Replace the hosted index.html/cloud-config.js/other web assets with the new version.
+   - Change the Service Worker CACHE_NAME in sw.js (example: pgr-3.4-shell-v1).
+   - Update update.json latestVersion and notes.
+   - Publish all files together.
+4. Users can open Settings > App Update > Check for Update.
+5. If a newer version is detected, Update Now refreshes the PWA and activates the new Service Worker.
+
+IMPORTANT:
+- Do NOT delete localStorage or IndexedDB as part of an update.
+- Ordinary web-feature updates do not require rebuilding the APK.
+- Changes to native Android/TWA settings require a new APK/AAB build.
+- Keep the Android signing key safe; it is needed for future Android releases.
+- The Apps Script Code.gs still needs its one-time deployment/update when you are ready for the 3.3 backend.

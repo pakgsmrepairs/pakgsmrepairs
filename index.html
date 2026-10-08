@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<title>Pak GSM Repair Update 3.3</title>
+<link rel="manifest" href="manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Pak GSM Repair 3.3">
+<script src="cloud-config.js"></script>
+<script>window.PGR_CLOUD_BACKUP_URL="https://script.google.com/macros/s/AKfycbwt0QAJE5LPgIHQp4Iaw1y-iuktZDqgzHYoSPd2X0FkPycLyuhODs84mnceU0AlewPfKw/exec";window.PGR_CLOUD_BACKUP_KEY="PGR-7f5c2b9a-4d81-9e63-a1f2-6c0b7d4e92ab";</script>
+<style>
+:root{--bg:#edf8f1;--card:#ffffff;--txt:#0f172a;--muted:#64748b;--p:#0f766e;--p2:#115e59;--red:#dc2626;--line:#dbe3ec;--green:#047857}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:linear-gradient(135deg,#064e3b,#0f766e);color:#fff;padding:20px 15px;position:sticky;top:0;z-index:5}.wrap{max-width:950px;margin:auto;padding:14px}
+h1{margin:0;font-size:24px}.sub{opacity:.9;font-size:12px}.shop-address{margin-top:5px;font-size:12px;line-height:1.35;opacity:.96}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.stat,.card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:14px;box-shadow:0 3px 12px #00000008}.stat span{font-size:11px;color:var(--muted)}.stat b{display:block;font-size:19px;margin-top:4px}
+.card{margin-top:13px;background:rgba(255,255,255,.94)}h2{font-size:17px;margin:0 0 12px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}label{font-size:12px;color:var(--muted);display:block;margin-bottom:4px}input,select,textarea{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:10px;font-size:14px;background:#fff;color:#0f172a}input::placeholder,textarea::placeholder{color:#64748b;opacity:1}#pinInput{color:#0f172a!important;background:#fff!important;-webkit-text-fill-color:#0f172a!important}textarea{min-height:70px;resize:vertical}
+button{border:0;border-radius:10px;padding:10px 13px;font-weight:700;cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}.primary{background:var(--p);color:white}.secondary{background:#e2e8f0}.danger{background:#fee2e2;color:#991b1b}.full{width:100%;margin-top:9px}
+.toolbar{display:flex;gap:8px}.toolbar input{flex:1}.customer{border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:8px;cursor:pointer}.top{display:flex;justify-content:space-between;gap:8px}.name{font-weight:800}.small{font-size:12px;color:var(--muted)}.pending{color:#b91c1c;font-weight:800}.paid{color:var(--green);font-weight:800}
+.tags{display:flex;flex-wrap:wrap;gap:7px}.tag{background:#ecfeff;border:1px solid #99f6e4;border-radius:999px;padding:8px 10px;font-size:12px}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:flex-end;z-index:30}.modal.show{display:flex}.sheet{background:#fff;max-width:950px;width:100%;max-height:94vh;overflow:auto;border-radius:20px 20px 0 0;padding:17px;margin:auto}.close{float:right}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.history{border-left:3px solid #99f6e4;padding:7px 10px;margin-top:7px;background:#f5fbf7;border-radius:6px}
+.notice{padding:10px;border-radius:10px;background:#fff7ed;border:1px solid #fed7aa;font-size:12px;margin-top:10px}
+#toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);background:#064e3b;color:#fff;padding:11px 15px;border-radius:12px;font-size:13px;font-weight:700;box-shadow:0 8px 30px #0003;opacity:0;pointer-events:none;transition:.2s;z-index:100;max-width:90%;text-align:center}.toast-show{opacity:1!important;transform:translate(-50%,0)!important}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #86efac;outline-offset:2px}@media(max-width:700px){.grid{grid-template-columns:1fr 1fr}.row{grid-template-columns:1fr}.top{align-items:flex-start}}
+
+.folder-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}.vault-list{margin-top:7px}.vault-item{display:flex;justify-content:space-between;gap:8px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px;font-size:12px}.vault-item button{padding:5px 8px}.google-box{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:10px}.google-status{font-size:12px;color:var(--muted);margin-top:7px}.google-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.music-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.auto-backup-row{display:flex;align-items:center;gap:10px;margin-top:12px;padding:12px;border:1px solid #86efac;background:#f0fdf4;border-radius:12px;color:#14532d}.auto-backup-row input{width:22px;height:22px;accent-color:#0f766e}.product-card{border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:9px;background:#fff}.product-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.product-meta{display:flex;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+
+.auth-gate{position:fixed;inset:0;background:linear-gradient(135deg,#064e3b,#0f766e);z-index:100000;display:none;align-items:center;justify-content:center;padding:18px}.auth-gate.show{display:flex}.auth-card{width:min(430px,100%);background:#fff;border-radius:22px;padding:22px;box-shadow:0 20px 60px #0005}.auth-card h2{font-size:24px;margin:0 0 5px}.auth-brand{color:#0f766e;font-weight:800;font-size:13px}.auth-tabs{display:flex;gap:7px;margin:15px 0}.auth-tabs button{flex:1}.auth-tab-active{background:#0f766e;color:#fff}.auth-msg{font-size:12px;min-height:18px;margin-top:8px}.auth-google{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+body.auth-locked>header,body.auth-locked>main,body.auth-locked>#toast,body.auth-locked>.modal{visibility:hidden}body.auth-locked{overflow:hidden}
+
+.photo-box{margin-top:14px;border:1px solid var(--line);border-radius:12px;padding:12px;background:#f8fffb}.photo-title{font-weight:700;margin-bottom:8px}.photo-actions{display:flex;gap:8px;flex-wrap:wrap}.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:9px;margin-top:10px}.photo-item{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;aspect-ratio:1}.photo-item img{width:100%;height:100%;object-fit:cover;display:block}.photo-item button{position:absolute;right:4px;top:4px;border:0;border-radius:50%;width:28px;height:28px;background:#fff;color:#b91c1c;font-weight:700;box-shadow:0 1px 5px #0003}.photo-empty{font-size:12px;color:var(--muted);padding:8px 0}
+
+.page-nav{display:flex;gap:8px;margin:0 auto;padding:10px 14px;max-width:950px;overflow-x:auto;background:#edf8f1;position:sticky;top:77px;z-index:4}
+.page-nav button{flex:1;border:1px solid #cbd5e1;background:#fff;color:#0f172a;border-radius:12px;padding:11px 10px;font-weight:800}
+.page-nav button.active{background:#0f766e;color:#fff;border-color:#0f766e}
+.app-page{display:none}.app-page.active{display:block}
+.vault-page-header{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.vault-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.vault-stat{background:#f8fafc;border:1px solid var(--line);border-radius:11px;padding:10px}
+.vault-stat b{display:block;font-size:18px}.vault-stat span{font-size:11px;color:var(--muted)}
+.google-link-box{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:10px}
+.google-email-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end}
+.update-box{background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:12px;margin-top:10px}.update-status{font-size:12px;color:#475569;margin-top:7px;line-height:1.45}.update-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.update-notes{margin:8px 0 0 18px;padding:0;font-size:12px;color:#475569}.update-ok{color:#047857;font-weight:700}.update-warn{color:#92400e;font-weight:700}
+#settingsModal{align-items:center;padding:12px}
+#settingsModal .sheet{width:min(950px,calc(100vw - 24px));max-width:950px!important;max-height:90vh;border-radius:20px;padding:20px;overflow-y:auto}
+@media(max-width:700px){#settingsModal{padding:8px}#settingsModal .sheet{width:100%;max-height:92vh;border-radius:18px}}
+@media(max-width:700px){.page-nav{top:73px;white-space:nowrap}.page-nav button{min-width:120px}.google-email-row{grid-template-columns:1fr}.vault-summary{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<style>
+  #startupVoiceToast{position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:99999;background:#e8f7ee;color:#145c36;border:1px solid #b8e2c8;border-radius:999px;padding:8px 14px;font:600 13px system-ui,sans-serif;box-shadow:0 4px 18px rgba(0,0,0,.12);display:none}
+</style>
+<div id="startupVoiceToast">🔊 Welcome to Park GSM Repair</div>
+<script>
+(function(){
+  const MSG='Welcome to Park GSM Repair, powered by Ali Hassan Mobile.';
+  function soundEnabled(){return localStorage.getItem('pgr_welcome_sound')!=='off'}
+  window.stopWelcomeSound=function(){try{if(window.speechSynthesis)window.speechSynthesis.cancel();}catch(e){} try{if(welcomeAudioContext){welcomeAudioContext.close();welcomeAudioContext=null}}catch(e){}}
+  window.toggleWelcomeSound=function(){const on=soundEnabled();localStorage.setItem('pgr_welcome_sound',on?'off':'on');updateMusicButton();if(on)stopWelcomeSound();showToast(on?'Welcome sound disabled':'Welcome sound enabled')}
+  window.updateMusicButton=function(){const b=document.getElementById('musicToggleBtn');if(b)b.textContent='🔊 Welcome Sound: '+(soundEnabled()?'ON':'OFF')}
+  function chimeAndSpeak(){
+    if(!soundEnabled()) return;
+    try{
+      const C=window.AudioContext||window.webkitAudioContext;
+      if(C){welcomeAudioContext=new C();const ctx=welcomeAudioContext,now=ctx.currentTime;[659.25,783.99,987.77].forEach((f,i)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(.0001,now+i*.12);g.gain.exponentialRampToValueAtTime(.07,now+i*.12+.02);g.gain.exponentialRampToValueAtTime(.0001,now+i*.12+.18);o.connect(g);g.connect(ctx.destination);o.start(now+i*.12);o.stop(now+i*.12+.2)})}
+    }catch(e){}
+    try{if('speechSynthesis' in window){window.speechSynthesis.cancel();welcomeUtterance=new SpeechSynthesisUtterance(MSG);welcomeUtterance.rate=.9;welcomeUtterance.pitch=1;welcomeUtterance.volume=.8;window.speechSynthesis.speak(welcomeUtterance)}}catch(e){}
+  }
+  window.addEventListener('load',()=>{updateMusicButton();setTimeout(chimeAndSpeak,250)});
+  ['pointerdown','touchstart','keydown'].forEach(ev=>window.addEventListener(ev,()=>{if(soundEnabled())chimeAndSpeak()},{once:true,passive:true}));
+})();
+</script>
+
+<div id="authGate" class="auth-gate show">
+  <div class="auth-card">
+    <div class="auth-brand">PARK GSM REPAIR</div>
+    <h2 id="authTitle">Sign in</h2>
+    <div class="small">Cloud backup is securely stored in the app owner’s Google Drive. No Google login is required on the client phone.</div>
+    <div class="auth-tabs">
+      <button id="loginTab" class="auth-tab-active" onclick="showAuthMode('login')">Login</button>
+      <button id="registerTab" class="secondary" onclick="showAuthMode('register')">Register</button>
+    </div>
+    <div id="registerFields" style="display:none">
+      <label>Full Name</label><input id="authName" autocomplete="name" placeholder="Your name">
+    </div>
+    <label style="margin-top:10px">Gmail / Email</label><input id="authEmail" type="email" autocomplete="email" placeholder="name@gmail.com">
+    <label style="margin-top:10px">Password</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="At least 6 characters">
+    <label id="confirmLabel" style="margin-top:10px;display:none">Confirm Password</label><input id="authConfirm" type="password" autocomplete="new-password" placeholder="Confirm password" style="display:none">
+    <button id="authAction" class="primary full" onclick="submitAuth()">Login</button>
+    <div id="authMsg" class="auth-msg"></div>
+    <div class="auth-google">
+      <div class="small"><b>☁️ Secure Cloud Backup</b> — your app backup is stored in the owner’s protected Google Drive. You do not need to sign in to Google on this phone.</div>
+      <button class="secondary full" onclick="testCloudBackup(true)">☁️ Check Cloud Backup</button>
+    </div>
+  </div>
+</div>
+<header><div class="wrap" style="padding:0;display:flex;justify-content:space-between;align-items:center;gap:12px">
+<div><h1>Park GSM Repair</h1><div class="shop-address">Powered by Ali Hassan Mobile</div><div class="sub">Customer • Payments • History • Backup</div></div>
+<button class="secondary" onclick="openQuickMenu()" style="background:#fff;color:#0f172a">☰ Menu</button>
+</div></header>
+<input id="restore" type="file" accept=".json,application/json" hidden onchange="restoreFile(event)">
+<div class="page-nav" aria-label="Main pages">
+<button id="pageClientBtn" class="active" onclick="showPage('client')">👤 Client Data</button>
+<button id="pageVaultBtn" onclick="showPage('vault')">📁 File Vault</button>
+<button id="pageProductsBtn" onclick="showPage('products')">🛒 Products</button>
+</div>
+<main class="wrap">
+<section id="clientPage" class="app-page active">
+<div class="grid">
+<div class="stat"><span>Customers</span><b id="cc">0</b></div>
+<div class="stat"><span>Jobs</span><b id="jc">0</b></div>
+<div class="stat"><span>Total</span><b id="ta">Rs 0</b></div>
+<div class="stat"><span>Pending</span><b id="pa">Rs 0</b></div>
+</div>
+<section class="card"><h2>Client Details / Repair</h2>
+<div class="row">
+<div><label>Name</label><input id="name"></div><div><label>Phone</label><input id="phone" inputmode="tel"></div>
+<div><label>Device Brand</label><input id="brand" placeholder="Infinix / TECNO / Itel..."></div><div><label>Device Model</label><input id="model"></div>
+<div><label>IMEI 1</label><input id="imei1"></div><div><label>IMEI 2</label><input id="imei2"></div>
+<div><label>Service</label><select id="service"><option>IC Level Work</option><option>eMMC</option><option>CPU Repair</option><option>Storage Upgrade</option><option>Plugin Removal</option><option>Other</option></select></div>
+<div><label>Status</label><select id="status" onchange="toggleParcelFields('status','parcelFields')"><option>Received</option><option>In Repair</option><option>Ready</option><option>Delivered</option><option>Parcel</option><option>Cancelled</option></select></div>
+<div id="parcelFields" style="display:none"><label>Parcel Courier</label><select id="parcelCourier"><option>TCS</option><option>Leopard Courier</option><option>GPO</option></select><label style="margin-top:8px">Tracking / Parcel No.</label><input id="parcelTracking" placeholder="Optional tracking number"></div>
+<div><label>Total Amount</label><input id="total" type="number" min="0"></div><div><label>Due Date</label><input id="due" type="date"></div>
+</div>
+<label style="margin-top:10px">Repair Notes</label><textarea id="notes"></textarea>
+<div class="photo-box"><div class="photo-title">📱 Device Photos <span class="small">Attach photos of the phone you received</span></div>
+<div class="photo-actions"><button type="button" class="secondary" onclick="openCamera('new')">📷 Camera</button><button type="button" class="secondary" onclick="openGallery('new')">🖼️ Gallery</button></div>
+<input id="newCameraInput" type="file" accept="image/*" capture="environment" hidden onchange="handlePhotoFiles(event,'new')">
+<input id="newGalleryInput" type="file" accept="image/*" multiple hidden onchange="handlePhotoFiles(event,'new')"><div id="newPhotoGrid" class="photo-grid"></div></div>
+<button class="primary full" onclick="addCustomer()">+ Save Customer</button></section>
+<section class="card"><h2>Customers</h2><div class="toolbar"><input id="search" oninput="render()" placeholder="Search name, phone, model, IMEI..."></div><div id="list"></div></section>
+<section class="card"><h2>Services</h2><div class="tags"><span class="tag">IC Level Work</span><span class="tag">eMMC</span><span class="tag">CPU Repair</span><span class="tag">Storage Upgrade</span><span class="tag">Plugin Removal</span></div></section>
+<section class="card"><h2>Shop Contact</h2><div><b>03030733452</b><br><span class="small">Ali Hassan, Nazer Market</span></div></section>
+</section>
+<section id="vaultPage" class="app-page">
+<section class="card"><div class="vault-page-header"><div><h2 style="margin:0">📁 File Vault</h2><div class="small">Your repair files stay organized here. This is now a separate main page.</div></div><button class="secondary" onclick="showPage('client')">👤 Clients</button></div>
+<div class="vault-summary"><div class="vault-stat"><span>Flash Files</span><b id="vaultCountFlash">0</b></div><div class="vault-stat"><span>Dump Files</span><b id="vaultCountDump">0</b></div><div class="vault-stat"><span>ISP Files</span><b id="vaultCountIsp">0</b></div></div></section>
+<section class="card"><h2>📁 Flash Files</h2><div class="small">Firmware / flash files</div><input type="file" multiple onchange="addVaultFiles('flash',this.files)"><div id="vault-flash" class="vault-list"></div></section>
+<section class="card"><h2>📁 Dump Files</h2><div class="small">eMMC / UFS / memory dumps</div><input type="file" multiple onchange="addVaultFiles('dump',this.files)"><div id="vault-dump" class="vault-list"></div></section>
+<section class="card"><h2>📁 ISP Files</h2><div class="small">ISP / pinout / repair files</div><input type="file" multiple onchange="addVaultFiles('isp',this.files)"><div id="vault-isp" class="vault-list"></div></section>
+</section>
+</section>
+<section id="productsPage" class="app-page">
+<section class="card"><div class="vault-page-header"><div><h2 style="margin:0">🛒 Products / Shop</h2><div class="small">Add products you want to sell. Publish the catalog to your public Google-friendly shop page.</div></div><button class="secondary" onclick="showPage('client')">👤 Clients</button></div>
+<div class="notice">The app can manage and publish your product catalog. To appear in Google Search, products also need a public web page; Google does not index a <code>content://</code> APK screen directly.</div>
+</section>
+<section class="card"><h2>Add / Edit Product</h2>
+<div class="row"><div><label>Product name</label><input id="prodName" placeholder="e.g. Type-C Charging Board"></div><div><label>Price (PKR)</label><input id="prodPrice" type="number" min="0" placeholder="1500"></div><div><label>SKU</label><input id="prodSku" placeholder="PGR-001"></div><div><label>Availability</label><select id="prodAvailability"><option value="in_stock">In stock</option><option value="out_of_stock">Out of stock</option><option value="preorder">Preorder</option></select></div></div>
+<label style="margin-top:10px">Product image URL</label><input id="prodImage" placeholder="https://.../product.jpg">
+<label style="margin-top:10px">Product page / order URL</label><input id="prodLink" placeholder="https://...">
+<label style="margin-top:10px">Description</label><textarea id="prodDesc" placeholder="Short, useful product description"></textarea>
+<div class="actions"><button class="primary" onclick="saveProduct()">💾 Save Product</button><button class="secondary" onclick="clearProductForm()">Clear</button></div>
+</section>
+<section class="card"><div class="vault-page-header"><h2 style="margin:0">Product Catalog</h2><button class="primary" onclick="publishProducts()">🌐 Publish to Cloud Shop</button></div><div id="productList"></div><div class="small" style="margin-top:10px">Public catalog: <span id="publicShopUrl">Not published yet</span></div></section>
+</section>
+</main><div id="toast" role="status" aria-live="polite"></div>
+
+<div class="modal" id="editModal"><div class="sheet"><button class="secondary close" onclick="closeEdit()">✕</button><h2 id="etitle">Customer</h2>
+<div class="row">
+<div><label>Name</label><input id="en"></div><div><label>Phone</label><input id="ep"></div><div><label>Brand</label><input id="eb"></div><div><label>Model</label><input id="em"></div>
+<div><label>IMEI 1</label><input id="ei1"></div><div><label>IMEI 2</label><input id="ei2"></div>
+<div><label>Service</label><select id="es"><option>IC Level Work</option><option>eMMC</option><option>CPU Repair</option><option>Storage Upgrade</option><option>Plugin Removal</option><option>Other</option></select></div>
+<div><label>Status</label><select id="est" onchange="toggleParcelFields('est','editParcelFields')"><option>Received</option><option>In Repair</option><option>Ready</option><option>Delivered</option><option>Parcel</option><option>Cancelled</option></select></div>
+<div id="editParcelFields" style="display:none"><label>Parcel Courier</label><select id="eparcelCourier"><option>TCS</option><option>Leopard Courier</option><option>GPO</option></select><label style="margin-top:8px">Tracking / Parcel No.</label><input id="eparcelTracking" placeholder="Optional tracking number"></div>
+<div><label>Total</label><input id="et" type="number"></div><div><label>Due Date</label><input id="ed" type="date"></div>
+</div>
+<div class="photo-box">
+  <div class="photo-title">📱 Device Photos <span class="small">Saved with this repair record</span></div>
+  <div class="photo-actions">
+    <button type="button" class="secondary" onclick="openCamera('edit')">📷 Camera</button>
+    <button type="button" class="secondary" onclick="openGallery('edit')">🖼️ Gallery</button>
+  </div>
+  <input id="editCameraInput" type="file" accept="image/*" capture="environment" hidden onchange="handlePhotoFiles(event,'edit')">
+  <input id="editGalleryInput" type="file" accept="image/*" multiple hidden onchange="handlePhotoFiles(event,'edit')">
+  <div id="editPhotoGrid" class="photo-grid"></div>
+</div>
+<div class="actions"><button class="primary" onclick="saveEdit()">Save</button><button class="secondary" onclick="whatsapp()">WhatsApp</button><button class="secondary" onclick="callCustomer()">Call</button><button class="secondary" onclick="receipt()">Receipt</button><button class="danger" onclick="delCustomer()">Delete</button></div>
+<hr><h2>Payment</h2><div class="row"><div><label>Payment Amount</label><input id="pay" type="number" min="0"></div><div><label>Method</label><select id="pm"><option>Cash</option><option>EasyPaisa</option><option>JazzCash</option><option>Bank Transfer</option><option>Other</option></select></div></div>
+<button class="primary full" onclick="addPayment()">Add Payment</button><div id="summary"></div><h2 style="margin-top:15px">Payment History</h2><div id="history"></div>
+</div></div>
+
+<div class="modal" id="quickModal"><div class="sheet" style="max-width:430px">
+<button class="secondary close" onclick="closeQuickMenu()">✕</button>
+<h2>Quick Menu</h2>
+<p class="small">All tools stay available here after reload.</p>
+<button class="secondary full" onclick="openSettings()">⚙️ Settings</button>
+<button class="secondary full" onclick="changePin()">🔐 Set / Change PIN</button>
+<button class="secondary full" onclick="lockNow()">🔒 PIN Lock</button>
+<button class="secondary full" onclick="backup();showToast('Backup exported')">💾 Backup</button>
+<button class="secondary full" onclick="document.getElementById('restore').click();closeQuickMenu()">♻️ Restore Backup</button>
+<button class="secondary full" onclick="shareBackup()">📤 Share Backup</button>
+<button class="secondary full" onclick="openGoogleSettings()">☁️ Cloud Backup</button>
+<button class="secondary full" onclick="closeQuickMenu();showPage('vault')">📁 Open File Vault</button>
+<button class="secondary full" onclick="openMusicSettings()">🔊 Welcome Music / Voice</button>
+<button class="danger full" onclick="signOutApp()">🚪 Sign Out</button>
+</div></div>
+
+<div class="modal" id="settingsModal"><div class="sheet">
+<button class="secondary close" onclick="$('settingsModal').classList.remove('show')">✕</button>
+<h2>Settings</h2>
+<div class="notice">Customer records and app settings are saved locally. Backup regularly before clearing app data or uninstalling.</div>
+<div class="update-box">
+<b>🔄 App Update</b>
+<div class="small" style="margin-top:5px">Current version: <b id="appVersionLabel">3.3</b></div>
+<div id="updateStatus" class="update-status">Checking update system…</div>
+<div id="updateNotes" class="update-notes" hidden></div>
+<div class="update-actions"><button class="primary" id="checkUpdateBtn" onclick="checkForAppUpdate(true)">🔄 Check for Update</button><button class="secondary" id="applyUpdateBtn" onclick="applyAppUpdate()" hidden>⬆️ Update Now</button></div>
+</div>
+<div class="actions">
+<button class="secondary" onclick="backup()">Export Backup</button>
+<button class="secondary" onclick="document.getElementById('restore').click()">Restore Backup</button>
+<button class="secondary" onclick="changePin()">Set / Change PIN</button>
+</div>
+<div class="google-box"><b>☁️ Cloud Backup</b>
+<div class="small" style="margin-top:5px">Backups are stored in the app owner’s Google Drive. Clients do not need a Google account, OAuth, or Client ID on their phone.</div>
+<div id="googleStatus" class="google-status">Checking cloud backup…</div>
+<div class="google-actions"><button class="primary" id="googleBackupBtn" onclick="googleDriveBackup()">☁️ Backup to Cloud</button><button class="secondary" id="googleRestoreBtn" onclick="googleDriveRestore()">♻️ Restore from Cloud</button><button class="secondary" onclick="testCloudBackup(false)">🔄 Check Connection</button></div>
+<div class="notice" style="margin-top:10px">Your customer records, File Vault and device photos can be included in the cloud backup. The cloud account itself is managed by the app owner.</div>
+</div>
+<label class="auto-backup-row"><input id="autoCloudBackup" type="checkbox" onchange="setAutoCloudBackup(this.checked)"> <span>☁️ <b>Automatic cloud backup</b> after every saved change</span></label><div class="small" style="margin-top:6px">When ON, customer changes, payments, photos and File Vault changes are automatically sent to the owner Google Drive. If the internet is temporarily unavailable, the app marks the backup as pending and retries when the connection returns.</div>
+<div class="google-box"><b>Welcome sound / voice</b><div class="small" style="margin-top:5px">The startup chime/voice can be stopped or disabled. This choice stays after refresh.</div><div class="music-row"><button class="secondary" onclick="stopWelcomeSound()">⏹ Stop Sound</button><button class="secondary" onclick="toggleWelcomeSound()" id="musicToggleBtn">🔊 Welcome Sound: ON</button></div></div>
+</div></div>
+
+<div class="modal" id="pinModal"><div class="sheet" style="max-width:420px"><h2>Pak GSM Repair Update 3.3 Security</h2><p class="small">Enter your PIN to continue.</p><input id="pinInput" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="8" autocomplete="one-time-code" placeholder="Enter PIN" aria-label="PIN" style="color:#0f172a!important;-webkit-text-fill-color:#0f172a!important;background:#fff!important;font-weight:700;letter-spacing:4px"><button class="primary full" onclick="unlock()">Unlock</button><div id="pinHint" class="small" style="margin-top:8px"></div><button class="secondary full" onclick="pinModal.classList.remove('show');changePin()">Set / Change PIN</button></div></div>
+
+<script>
+const KEY='pgr_pro_v4', PINKEY='pgr_pin_hash_v3', DBNAME='PakGSMRepairDB', DBVER=5;
+// Private owner configuration. The end user never sees these settings.
+// Deploy the included Google Apps Script as a Web App (execute as owner / access anyone),
+// then paste its /exec URL and the matching secret here once. No OAuth Client ID is needed.
+const CLOUD_BACKUP_URL = String(window.PGR_CLOUD_BACKUP_URL||'');
+const CLOUD_BACKUP_KEY = String(window.PGR_CLOUD_BACKUP_KEY||'');
+let vaultFiles=[];
+let db={customers:[],settings:{},updatedAt:0};
+let editId=null, dbReady=false, pendingNewPhotos=[];
+let welcomeUtterance=null, welcomeAudioContext=null, cloudBackupReady=false;
+let authMode='login', authUser=null;
+const $=id=>document.getElementById(id);
+const money=n=>'Rs '+Number(n||0).toLocaleString('en-PK');
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+function safeId(){try{if(window.crypto&&crypto.randomUUID)return crypto.randomUUID()}catch(e){}return 'c_'+Date.now()+'_'+Math.random().toString(36).slice(2)}
+function readLocal(){try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&Array.isArray(x.customers))return x}catch(e){}return {customers:[],settings:{},updatedAt:0}}
+db=readLocal();
+function openDB(){return new Promise((resolve,reject)=>{if(!window.indexedDB)return reject(new Error('IndexedDB unavailable'));const r=indexedDB.open(DBNAME,DBVER);r.onupgradeneeded=()=>{const d=r.result;if(!d.objectStoreNames.contains('app'))d.createObjectStore('app');if(!d.objectStoreNames.contains('vault'))d.createObjectStore('vault',{keyPath:'id'});if(!d.objectStoreNames.contains('photos'))d.createObjectStore('photos',{keyPath:'id'})};r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error||new Error('DB open failed'))})}
+async function idbGet(){try{const d=await openDB();return await new Promise((res,rej)=>{const q=d.transaction('app','readonly').objectStore('app').get('db');q.onsuccess=()=>res(q.result||null);q.onerror=()=>rej(q.error)})}catch(e){return null}}
+async function idbPut(payload){const d=await openDB();return new Promise((res,rej)=>{const q=d.transaction('app','readwrite').objectStore('app').put(payload,'db');q.onsuccess=()=>res(true);q.onerror=()=>rej(q.error||new Error('DB write failed'))})}
+let cloudSyncTimer=null;
+async function vaultGetAll(){try{const d=await openDB();return await new Promise((res,rej)=>{const q=d.transaction('vault','readonly').objectStore('vault').getAll();q.onsuccess=()=>res(q.result||[]);q.onerror=()=>rej(q.error)})}catch(e){return []}}
+async function vaultPut(file){const d=await openDB();return new Promise((res,rej)=>{const q=d.transaction('vault','readwrite').objectStore('vault').put(file);q.onsuccess=()=>res(true);q.onerror=()=>rej(q.error||new Error('Vault write failed'))})}
+async function vaultDelete(id){const d=await openDB();return new Promise((res,rej)=>{const q=d.transaction('vault','readwrite').objectStore('vault').delete(id);q.onsuccess=()=>res(true);q.onerror=()=>rej(q.error)})}
+async function addVaultFiles(folder,fileList){for(const f of Array.from(fileList||[])){const data=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=()=>rej(r.error);r.readAsDataURL(f)});await vaultPut({id:safeId(),folder,name:f.name,type:f.type||'application/octet-stream',size:f.size,data,createdAt:Date.now()})}await refreshVault();scheduleCloudBackup();showToast('Files added to '+folder.toUpperCase()+' folder');}
+async function refreshVault(){vaultFiles=await vaultGetAll();['flash','dump','isp'].forEach(folder=>{const el=$('vault-'+folder);if(!el)return;const rows=vaultFiles.filter(x=>x.folder===folder);el.innerHTML=rows.length?rows.map(x=>`<div class="vault-item"><span>📄 ${esc(x.name)} <span class="small">(${Math.round(x.size/1024)} KB)</span></span><span><button class="secondary" onclick="downloadVaultFile('${x.id}')">Save</button><button class="danger" onclick="removeVaultFile('${x.id}')">×</button></span></div>`).join(''):'<div class="small">No files yet.</div>'});['flash','dump','isp'].forEach(folder=>{const id='vaultCount'+folder.charAt(0).toUpperCase()+folder.slice(1);if($(id))$(id).textContent=vaultFiles.filter(x=>x.folder===folder).length});}
+async function downloadVaultFile(id){const x=vaultFiles.find(f=>f.id===id)|| (await vaultGetAll()).find(f=>f.id===id);if(!x)return;const a=document.createElement('a');a.href=x.data;a.download=x.name;document.body.appendChild(a);a.click();a.remove()}
+async function removeVaultFile(id){if(!confirm('Delete this file from the vault?'))return;await vaultDelete(id);await refreshVault();scheduleCloudBackup();showToast('File removed')}
+async function photoGetAll(){try{const d=await openDB();return await new Promise((res,rej)=>{const q=d.transaction('photos','readonly').objectStore('photos').getAll();q.onsuccess=()=>res(q.result||[]);q.onerror=()=>rej(q.error)})}catch(e){return []}}
+async function photoPut(photo){const d=await openDB();return new Promise((res,rej)=>{const q=d.transaction('photos','readwrite').objectStore('photos').put(photo);q.onsuccess=()=>res(true);q.onerror=()=>rej(q.error)})}
+async function photoDelete(id){try{const d=await openDB();return await new Promise((res,rej)=>{const q=d.transaction('photos','readwrite').objectStore('photos').delete(id);q.onsuccess=()=>res(true);q.onerror=()=>rej(q.error)})}catch(e){return false}}
+async function photoDeleteForCustomer(customerId){const all=await photoGetAll();for(const p of all.filter(x=>x.customerId===customerId))await photoDelete(p.id);scheduleCloudBackup()}
+function openCamera(mode){$(mode==='new'?'newCameraInput':'editCameraInput').click()}
+function openGallery(mode){$(mode==='new'?'newGalleryInput':'editGalleryInput').click()}
+function resizePhoto(file){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>{const img=new Image();img.onload=()=>{const max=1600;let w=img.naturalWidth,h=img.naturalHeight;if(Math.max(w,h)>max){const s=max/Math.max(w,h);w=Math.round(w*s);h=Math.round(h*s)}const cv=document.createElement('canvas');cv.width=w;cv.height=h;const ctx=cv.getContext('2d');ctx.drawImage(img,0,0,w,h);resolve(cv.toDataURL('image/jpeg',0.78))};img.onerror=reject;img.src=r.result};r.onerror=reject;r.readAsDataURL(file)})}
+async function handlePhotoFiles(e,mode){const files=Array.from(e.target.files||[]);e.target.value='';if(!files.length)return;try{for(const file of files){if(!file.type.startsWith('image/'))continue;const data=await resizePhoto(file);const p={id:safeId(),customerId:mode==='edit'?editId:null,data,name:file.name||'device.jpg',createdAt:Date.now()};if(mode==='new')pendingNewPhotos.push(p);else await photoPut(p)}renderPhotoGrid(mode);if(mode==='edit'){scheduleCloudBackup();showToast(files.length+' photo(s) added')}}catch(err){alert('Could not add photo: '+err.message)}}
+async function renderPhotoGrid(mode){const el=$(mode==='new'?'newPhotoGrid':'editPhotoGrid');if(!el)return;let rows=mode==='new'?pendingNewPhotos:(await photoGetAll()).filter(x=>x.customerId===editId);el.innerHTML=rows.length?rows.map(p=>`<div class="photo-item"><img src="${p.data}" alt="Device photo"><button type="button" title="Delete photo" onclick="deleteDevicePhoto('${p.id}','${mode}')">×</button></div>`).join(''):'<div class="photo-empty">No device photos added yet.</div>'}
+async function deleteDevicePhoto(id,mode){if(!confirm('Delete this device photo?'))return;if(mode==='new'){pendingNewPhotos=pendingNewPhotos.filter(p=>p.id!==id)}else {await photoDelete(id);scheduleCloudBackup()}renderPhotoGrid(mode)}
+async function attachPendingPhotos(customerId){for(const p of pendingNewPhotos){p.customerId=customerId;await photoPut(p)}pendingNewPhotos=[];scheduleCloudBackup()}
+async function restorePhotos(files){const d=await openDB();const tx=d.transaction('photos','readwrite'),st=tx.objectStore('photos');await new Promise((res,rej)=>{const q=st.clear();q.onsuccess=()=>res();q.onerror=()=>rej(q.error)});for(const f of (files||[])){if(f&&f.id&&f.customerId&&f.data)st.put(f)}await new Promise((res,rej)=>{tx.oncomplete=res;tx.onerror=()=>rej(tx.error)});scheduleCloudBackup()}
+async function buildBackupPayload(){return {app:'Pak GSM Repair Update 3.3',version:'3.3',cloudMode:'owner-drive',exportedAt:new Date().toISOString(),deviceId:getDeviceId(),data:db,vault:await vaultGetAll(),photos:await photoGetAll(),products:readProducts()}}
+async function restoreVault(files){const d=await openDB();const tx=d.transaction('vault','readwrite'),st=tx.objectStore('vault');await new Promise((res,rej)=>{const q=st.clear();q.onsuccess=()=>res();q.onerror=()=>rej(q.error)});for(const f of (files||[]))st.put(f);await new Promise((res,rej)=>{tx.oncomplete=res;tx.onerror=()=>rej(tx.error)}) ;await refreshVault();scheduleCloudBackup()}
+function autoCloudEnabled(){return !!(db.settings&&db.settings.autoCloudBackup!==false)}
+function markCloudPending(){try{localStorage.setItem('pgr_cloud_pending','1')}catch(e){}}
+function clearCloudPending(){try{localStorage.removeItem('pgr_cloud_pending')}catch(e){}}
+async function persist(){
+  db.updatedAt=Date.now();
+  db.settings=db.settings||{};
+  if(typeof db.settings.autoCloudBackup!=='boolean')db.settings.autoCloudBackup=true;
+  const payload=JSON.stringify(db);
+  try{localStorage.setItem(KEY,payload)}catch(e){alert('Save failed: device storage is blocked/full. Export a backup first.');return false}
+  try{await idbPut(payload)}catch(e){console.warn('IndexedDB backup failed',e)}
+  if(autoCloudEnabled()){markCloudPending();scheduleCloudBackup()}
+  return true
+}
+function scheduleCloudBackup(delay=900){
+  if(!autoCloudEnabled()||!cloudConfigured()){markCloudPending();return}
+  clearTimeout(cloudSyncTimer);
+  cloudSyncTimer=setTimeout(async()=>{
+    try{
+      const ok=await googleDriveBackup(true);
+      if(ok)clearCloudPending(); else markCloudPending();
+    }catch(e){markCloudPending();console.warn('Cloud backup queue failed:',e)}
+  },delay);
+}
+async function retryPendingCloudBackup(){
+  if(!autoCloudEnabled()||!cloudConfigured()||!localStorage.getItem('pgr_cloud_pending'))return;
+  try{if(!cloudBackupReady)await testCloudBackup(false);if(cloudBackupReady&&await googleDriveBackup(true))clearCloudPending()}catch(e){console.warn('Pending cloud backup retry failed:',e)}
+}
+async function loadStoredData(){
+  const raw=await idbGet();
+  if(raw){try{const other=JSON.parse(raw);if(Array.isArray(other.customers)&&Number(other.updatedAt||0)>Number(db.updatedAt||0)){db=other;localStorage.setItem(KEY,JSON.stringify(db))}}catch(e){}}
+  dbReady=true; db.settings=db.settings||{}; if(typeof db.settings.autoCloudBackup!=='boolean')db.settings.autoCloudBackup=true; cloudBackupReady=false; await refreshVault(); render(); updateGoogleStatus(); setTimeout(retryPendingCloudBackup,700);
+  // Enforce the saved PIN whenever the app is opened/reloaded.
+  if(localStorage.getItem(PINKEY)){setTimeout(()=>{ $('pinHint').textContent=''; $('pinInput').value=''; $('pinModal').classList.add('show'); $('pinInput').focus(); },120);}
+}
+function pending(c){return Math.max(0,Number(c.total||0)-Number(c.paid||0))}
+let toastTimer;function showToast(msg){const t=$('toast');if(!t)return;t.textContent=msg;t.classList.add('toast-show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('toast-show'),2200)}
+function render(){
+  $('cc').textContent=db.customers.length;$('jc').textContent=db.customers.length;
+  $('ta').textContent=money(db.customers.reduce((a,c)=>a+Number(c.total||0),0));
+  $('pa').textContent=money(db.customers.reduce((a,c)=>a+pending(c),0));
+  const q=String($('search').value||'').toLowerCase().trim();
+  const a=db.customers.filter(c=>(c.name+' '+c.phone+' '+c.brand+' '+c.model+' '+c.imei1+' '+c.imei2).toLowerCase().includes(q));
+  $('list').innerHTML=a.length?a.map(c=>`<div class="customer" data-id="${esc(c.id)}"><div class="top"><div><div class="name">${esc(c.name)}</div><div class="small">${esc(c.phone)} • ${esc(c.brand)} ${esc(c.model)}</div></div><div class="${pending(c)?'pending':'paid'}">${money(pending(c))} pending</div></div><div class="small" style="margin-top:7px">${esc(c.service)} • ${esc(c.status)}${c.status==='Parcel'&&c.parcelCourier?' • '+esc(c.parcelCourier)+(c.parcelTracking?' • '+esc(c.parcelTracking):''):''} • Total ${money(c.total)} • Paid ${money(c.paid)}${c.due?' • Due '+esc(c.due):''}</div></div>`).join(''):'<div class="small" style="padding:20px;text-align:center">No customers found.</div>';
+  document.querySelectorAll('.customer[data-id]').forEach(el=>el.addEventListener('click',()=>openEdit(el.dataset.id)));
+}
+function toggleParcelFields(statusId, fieldsId){
+  const status=$(statusId), box=$(fieldsId);
+  if(!status||!box)return;
+  box.style.display=status.value==='Parcel'?'block':'none';
+}
+async function addCustomer(){
+  const c={id:safeId(),name:$('name').value.trim(),phone:$('phone').value.trim(),brand:$('brand').value.trim(),model:$('model').value.trim(),imei1:$('imei1').value.trim(),imei2:$('imei2').value.trim(),service:$('service').value,status:$('status').value,parcelCourier:$('parcelCourier').value,parcelTracking:$('parcelTracking').value.trim(),total:Number($('total').value||0),paid:0,due:$('due').value,notes:$('notes').value.trim(),history:[],created:new Date().toISOString()};
+  if(!c.name){alert('Customer name required');$('name').focus();return}
+  db.customers.unshift(c);
+  try{await attachPendingPhotos(c.id)}catch(e){db.customers.shift();pendingNewPhotos=[];alert('Could not save device photos: '+e.message);return}
+  if(!await persist()){db.customers.shift();await photoDeleteForCustomer(c.id);return}
+  ['name','phone','brand','model','imei1','imei2','total','due','notes','parcelTracking'].forEach(id=>$(id).value=''); $('status').value='Received'; toggleParcelFields('status','parcelFields');
+  render();
+  renderPhotoGrid('new');
+  showToast('Customer saved successfully.');
+}
+function openEdit(id){editId=id;const c=db.customers.find(x=>x.id===id);if(!c)return;$('etitle').textContent=c.name;$('en').value=c.name;$('ep').value=c.phone;$('eb').value=c.brand;$('em').value=c.model;$('ei1').value=c.imei1;$('ei2').value=c.imei2;$('es').value=c.service;$('est').value=c.status;$('et').value=c.total;$('ed').value=c.due||'';$('eparcelCourier').value=c.parcelCourier||'TCS';$('eparcelTracking').value=c.parcelTracking||'';toggleParcelFields('est','editParcelFields');$('pay').value='';renderEdit();renderPhotoGrid('edit');$('editModal').classList.add('show')}
+function renderEdit(){const c=db.customers.find(x=>x.id===editId);if(!c)return;$('summary').innerHTML=`<div class="notice">Total: <b>${money(c.total)}</b> &nbsp; Paid: <b>${money(c.paid)}</b> &nbsp; Pending: <b>${money(pending(c))}</b></div>`;$('history').innerHTML=(c.history||[]).length?c.history.slice().reverse().map(h=>`<div class="history"><b>${money(h.amount)}</b> — ${esc(h.method)}<br><span class="small">${new Date(h.date).toLocaleString()}</span></div>`).join(''):'<div class="small">No payments recorded.</div>'}
+async function saveEdit(){const c=db.customers.find(x=>x.id===editId);if(!c)return;Object.assign(c,{name:$('en').value.trim(),phone:$('ep').value.trim(),brand:$('eb').value.trim(),model:$('em').value.trim(),imei1:$('ei1').value.trim(),imei2:$('ei2').value.trim(),service:$('es').value,status:$('est').value,parcelCourier:$('eparcelCourier').value,parcelTracking:$('eparcelTracking').value.trim(),total:Number($('et').value||0),due:$('ed').value});if(await persist()){closeEdit();render();showToast('Customer updated successfully.')}}
+async function addPayment(){const c=db.customers.find(x=>x.id===editId),a=Number($('pay').value||0);if(!c||a<=0){alert('Enter a valid payment amount');return}c.paid=Number(c.paid||0)+a;c.history=c.history||[];c.history.push({amount:a,method:$('pm').value,date:new Date().toISOString()});if(await persist()){$('pay').value='';renderEdit();render();showToast('Payment saved successfully.')}}
+function closeEdit(){$('editModal').classList.remove('show');editId=null}
+async function delCustomer(){if(confirm('Delete this customer and payment history?')){const deletedId=editId;db.customers=db.customers.filter(c=>c.id!==editId);if(await persist()){await photoDeleteForCustomer(deletedId);closeEdit();render()}}}
+function whatsapp(){const c=db.customers.find(x=>x.id===editId);if(!c)return;const msg=`Assalam-o-Alaikum ${c.name},\n\nPak GSM Repair\nDevice: ${c.brand} ${c.model}\nTotal: ${money(c.total)}\nPaid: ${money(c.paid)}\nPending: ${money(pending(c))}\n\nContact: 03030733452`;window.open('https://wa.me/'+c.phone.replace(/\D/g,'')+'?text='+encodeURIComponent(msg),'_blank')}
+function callCustomer(){const c=db.customers.find(x=>x.id===editId);if(c)location.href='tel:'+c.phone}
+function receipt(){const c=db.customers.find(x=>x.id===editId);if(!c)return;const txt=`PAK GSM REPAIR\n03030733452\nAli Hassan, Nazer Market\n\nCustomer: ${c.name}\nPhone: ${c.phone}\nDevice: ${c.brand} ${c.model}\nService: ${c.service}\nStatus: ${c.status}${c.status==='Parcel'?'\nCourier: '+(c.parcelCourier||'')+'\nTracking: '+(c.parcelTracking||'') : ''}\nTotal: ${money(c.total)}\nPaid: ${money(c.paid)}\nPending: ${money(pending(c))}\n\nThank you.`;const w=window.open('','_blank');if(w){w.document.write('<pre style="font:16px system-ui;white-space:pre-wrap;padding:20px">'+esc(txt)+'</pre>');w.document.close();w.print()}}
+async function backup(){const exportData=await buildBackupPayload();const blob=new Blob([JSON.stringify(exportData,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Pak_GSM_Repair_Backup_'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+async function restoreFile(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=async()=>{try{const x=JSON.parse(r.result),candidate=x.data&&x.data.customers?x.data:x;if(!Array.isArray(candidate.customers))throw new Error('invalid');if(!confirm('Restore this backup? Current data will be replaced. A safety backup will be attempted first.')){e.target.value='';return}if(cloudConfigured()){const safety=await googleDriveBackup(true);if(!safety&&!confirm('Cloud safety backup could not be saved. Continue with local restore anyway?')){e.target.value='';return}}const old=db;const oldProducts=readProducts();db={customers:candidate.customers,settings:candidate.settings||{},updatedAt:Date.now()};if(await persist()){await restoreVault(x.vault||[]);await restorePhotos(x.photos||[]);if(Array.isArray(x.products))saveProductsLocal(x.products);else saveProductsLocal(oldProducts);renderProducts();render();alert('Backup restored successfully. A pre-restore safety copy was kept when cloud backup was available.')}else db=old}catch(err){alert('Invalid or damaged backup file. Nothing was changed.')}e.target.value=''};r.readAsText(f)}
+async function shareBackup(){const payload=await buildBackupPayload();const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),file=new File([blob],'Pak_GSM_Repair_Backup.json',{type:'application/json'});if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]}))await navigator.share({title:'Pak GSM Repair Update 3.3 Backup',files:[file]});else backup()}
+async function hash(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function authHash(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+const PRODUCTS_KEY='pgr_products_v1';
+let editingProductId=null;
+function readProducts(){try{const x=JSON.parse(localStorage.getItem(PRODUCTS_KEY)||'[]');return Array.isArray(x)?x:[]}catch(e){return []}}
+function saveProductsLocal(list){localStorage.setItem(PRODUCTS_KEY,JSON.stringify(list))}
+function clearProductForm(){editingProductId=null;['prodName','prodPrice','prodSku','prodImage','prodLink','prodDesc'].forEach(id=>$(id).value='');$('prodAvailability').value='in_stock'}
+function saveProduct(){const name=$('prodName').value.trim();if(!name){alert('Product name is required.');return}const list=readProducts();const item={id:editingProductId||safeId(),name,price:Number($('prodPrice').value||0),sku:$('prodSku').value.trim(),availability:$('prodAvailability').value,image:$('prodImage').value.trim(),link:$('prodLink').value.trim(),description:$('prodDesc').value.trim(),updatedAt:new Date().toISOString()};const i=list.findIndex(x=>x.id===item.id);if(i>=0)list[i]=item;else list.unshift(item);saveProductsLocal(list);clearProductForm();renderProducts();markCloudPending();scheduleCloudBackup();showToast('Product saved');}
+function editProduct(id){const p=readProducts().find(x=>x.id===id);if(!p)return;editingProductId=id;$('prodName').value=p.name||'';$('prodPrice').value=p.price||'';$('prodSku').value=p.sku||'';$('prodAvailability').value=p.availability||'in_stock';$('prodImage').value=p.image||'';$('prodLink').value=p.link||'';$('prodDesc').value=p.description||'';window.scrollTo({top:document.getElementById('productsPage').offsetTop||0,behavior:'smooth'})}
+function deleteProduct(id){if(!confirm('Delete this product?'))return;saveProductsLocal(readProducts().filter(x=>x.id!==id));renderProducts();markCloudPending();scheduleCloudBackup();showToast('Product deleted')}
+function renderProducts(){const el=$('productList');if(!el)return;const list=readProducts();el.innerHTML=list.length?list.map(p=>`<div class="product-card"><div class="top"><div><b>${esc(p.name)}</b><div class="product-meta">${p.sku?esc(p.sku)+' • ':''}Rs ${Number(p.price||0).toLocaleString('en-PK')} • ${esc((p.availability||'in_stock').replace('_',' '))}</div></div>${p.image?`<img src="${esc(p.image)}" alt="${esc(p.name)}" style="width:64px;height:64px;object-fit:cover;border-radius:9px" onerror="this.style.display='none'">`:''}</div><div class="small" style="margin-top:7px">${esc(p.description||'')}</div><div class="product-actions"><button class="secondary" onclick="editProduct('${p.id}')">Edit</button><button class="danger" onclick="deleteProduct('${p.id}')">Delete</button></div></div>`).join(''):'<div class="small">No products added yet.</div>';const u=$('publicShopUrl');if(u){const c=getCloudConfig();u.textContent=c.url?c.url+'?action=store':'Publish the catalog first';}}
+async function publishProducts(){const list=readProducts();if(!list.length){alert('Add at least one product first.');return false}if(!cloudConfigured()){alert('Cloud server is not configured.');return false}try{if(!cloudBackupReady)await testCloudBackup(false);if(!cloudBackupReady)return false;const c=getCloudConfig();const body=JSON.stringify({action:'products',key:c.key,products:list});const r=await fetch(c.url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body});const j=await r.json();if(!j.ok)throw new Error(j.error||'Publish failed');showToast('🌐 Product catalog published');clearCloudPending();renderProducts();return true}catch(e){alert('Product publish failed: '+e.message);return false}}
+
+function authAccounts(){try{return JSON.parse(localStorage.getItem('pgr_auth_accounts')||'{}')}catch(e){return {}}}
+function saveAuthAccounts(a){localStorage.setItem('pgr_auth_accounts',JSON.stringify(a))}
+function showAuthMode(mode){authMode=mode;const reg=mode==='register';$('authTitle').textContent=reg?'Create account':'Sign in';$('registerFields').style.display=reg?'block':'none';$('confirmLabel').style.display=reg?'block':'none';$('authConfirm').style.display=reg?'block':'none';$('authAction').textContent=reg?'Register':'Login';$('loginTab').className=reg?'secondary':'auth-tab-active';$('registerTab').className=reg?'auth-tab-active':'secondary';$('authMsg').textContent='';$('authPassword').autocomplete=reg?'new-password':'current-password'}
+function setAuthMessage(msg,error=false){$('authMsg').textContent=msg;$('authMsg').style.color=error?'#b91c1c':'#047857'}
+function setAuthenticated(user){authUser=user;localStorage.setItem('pgr_auth_session',JSON.stringify(user));$('authGate').classList.remove('show');document.body.classList.remove('auth-locked');showToast('Welcome '+(user.name||user.email||'User'));if(localStorage.getItem(PINKEY))setTimeout(()=>lockNow(),120)}
+function signOutApp(){authUser=null;localStorage.removeItem('pgr_auth_session');closeQuickMenu();document.body.classList.add('auth-locked');$('authGate').classList.add('show');showAuthMode('login');setAuthMessage('Signed out.');}
+async function submitAuth(){const email=$('authEmail').value.trim().toLowerCase(),pass=$('authPassword').value;if(!/^\S+@\S+\.\S+$/.test(email)){setAuthMessage('Enter a valid email address.',true);return}if(pass.length<6){setAuthMessage('Password must be at least 6 characters.',true);return}const accounts=authAccounts(),key=email,hashv=await authHash(pass);if(authMode==='register'){if(accounts[key]){setAuthMessage('This account is already registered. Please Login.',true);return}if($('authConfirm').value!==pass){setAuthMessage('Passwords do not match.',true);return}accounts[key]={name:$('authName').value.trim()||email.split('@')[0],email,hash:hashv,createdAt:new Date().toISOString()};saveAuthAccounts(accounts);setAuthenticated({name:accounts[key].name,email});return}const a=accounts[key];if(!a||a.hash!==hashv){setAuthMessage('Email or password is incorrect.',true);return}setAuthenticated({name:a.name,email:a.email})}
+async function googleAuthGate(){return testCloudBackup(true)}
+const APP_VERSION='3.3';
+const UPDATE_MANIFEST_URL='./update.json';
+let remoteAppUpdate=null;
+function setUpdateStatus(msg,kind){const el=$('updateStatus');if(!el)return;el.className='update-status '+(kind==='ok'?'update-ok':kind==='warn'?'update-warn':'');el.textContent=msg}
+function versionParts(v){return String(v||'0').split('.').map(x=>parseInt(x,10)||0)}
+function versionCompare(a,b){const A=versionParts(a),B=versionParts(b);for(let i=0;i<Math.max(A.length,B.length);i++){const x=A[i]||0,y=B[i]||0;if(x!==y)return x>y?1:-1}return 0}
+function showUpdateNotes(notes){const el=$('updateNotes');if(!el)return;const arr=Array.isArray(notes)?notes.filter(Boolean):[];el.innerHTML=arr.length?arr.map(x=>'• '+esc(x)).join('<br>'):'';el.hidden=!arr.length}
+async function fetchUpdateManifest(){
+  const u=UPDATE_MANIFEST_URL+(UPDATE_MANIFEST_URL.includes('?')?'&':'?')+'t='+Date.now();
+  const r=await fetch(u,{cache:'no-store',headers:{'Cache-Control':'no-cache'}});
+  if(!r.ok)throw new Error('Update server returned '+r.status);
+  const data=await r.json();
+  if(!data||!data.latestVersion)throw new Error('Invalid update information');
+  return data;
+}
+async function checkForAppUpdate(showResult=true){
+  const btn=$('checkUpdateBtn'),apply=$('applyUpdateBtn');
+  if(btn)btn.disabled=true;if(apply)apply.hidden=true;showUpdateNotes([]);
+  setUpdateStatus('Checking for the latest version…');
+  try{
+    const data=await fetchUpdateManifest();remoteAppUpdate=data;
+    const cmp=versionCompare(String(data.latestVersion),APP_VERSION);
+    if(cmp>0){
+      setUpdateStatus('Update available: Version '+esc(String(data.latestVersion)), 'warn');
+      showUpdateNotes(data.notes);
+      if(apply)apply.hidden=false;
+      if(showResult)showToast('🔄 New app version '+data.latestVersion+' is available');
+      return true;
+    }
+    setUpdateStatus('✓ You are using the latest app version ('+APP_VERSION+').','ok');
+    if(showResult)showToast('✓ App is up to date');
+    return false;
+  }catch(e){
+    remoteAppUpdate=null;
+    setUpdateStatus('Update check unavailable right now. The app will continue normally.','warn');
+    if(showResult)showToast('Update check failed — try again later');
+    return false;
+  }finally{if(btn)btn.disabled=false}
+}
+async function applyAppUpdate(){
+  if(!remoteAppUpdate){if(!(await checkForAppUpdate(true)))return}
+  if(!remoteAppUpdate||versionCompare(String(remoteAppUpdate.latestVersion),APP_VERSION)<=0)return;
+  const apply=$('applyUpdateBtn');if(apply)apply.disabled=true;
+  setUpdateStatus('Downloading the new app files…');
+  try{
+    if('serviceWorker' in navigator&&location.protocol==='https:'){
+      const reg=await navigator.serviceWorker.getRegistration();
+      if(reg){
+        await reg.update();
+        if(reg.waiting){reg.waiting.postMessage({type:'SKIP_WAITING'});await new Promise(resolve=>{const timer=setTimeout(resolve,5000);navigator.serviceWorker.addEventListener('controllerchange',()=>{clearTimeout(timer);resolve()},{once:true})});}
+      }
+    }
+    if(remoteAppUpdate.updateUrl){window.location.href=remoteAppUpdate.updateUrl+(remoteAppUpdate.updateUrl.includes('?')?'&':'?')+'updated='+Date.now();}
+    else window.location.reload();
+  }catch(e){
+    setUpdateStatus('Update could not be applied automatically. Please close and reopen the app after the owner publishes the new version.','warn');
+    if(apply)apply.disabled=false;
+  }
+}
+function getCloudConfig(){return {url:String(CLOUD_BACKUP_URL||db.settings&&db.settings.cloudBackupUrl||'').trim(),key:String(CLOUD_BACKUP_KEY||db.settings&&db.settings.cloudBackupKey||'').trim()}}
+function getDeviceId(){let id=localStorage.getItem('pgr_cloud_device_id');if(!id){id=safeId();localStorage.setItem('pgr_cloud_device_id',id)}return id}
+function cloudConfigured(){const c=getCloudConfig();return !!(c.url&&c.key)}
+async function cloudPost(payload){const c=getCloudConfig();if(!c.url||!c.key)throw new Error('Cloud backup is not configured yet. The app owner must finish the one-time cloud setup.');
+  const body=JSON.stringify({action:'backup',key:c.key,deviceId:getDeviceId(),payload});
+  try{const r=await fetch(c.url,{method:'POST',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},body});if(!r.ok)throw new Error('Cloud server returned '+r.status);const t=await r.text();let j={};try{j=JSON.parse(t)}catch(e){}if(j&&j.ok===false)throw new Error(j.error||'Cloud backup rejected');return true}catch(e){try{if(navigator.sendBeacon){const ok=navigator.sendBeacon(c.url,new Blob([body],{type:'text/plain;charset=utf-8'}));if(ok)return true}}catch(_e){}throw e}}
+function cloudJsonp(url){return new Promise((resolve,reject)=>{const cb='pgrCloudCb_'+Date.now()+'_'+Math.random().toString(36).slice(2);const s=document.createElement('script');let done=false;const cleanup=()=>{try{delete window[cb]}catch(e){window[cb]=undefined}try{s.remove()}catch(e){}};window[cb]=(data)=>{done=true;cleanup();resolve(data)};s.onerror=()=>{if(done)return;done=true;cleanup();reject(new Error('Cloud restore request failed.'))};s.src=url+(url.includes('?')?'&':'?')+'callback='+encodeURIComponent(cb);document.body.appendChild(s);setTimeout(()=>{if(done)return;done=true;cleanup();reject(new Error('Cloud restore timed out.'))},20000)})}
+async function testCloudBackup(fromGate=false){try{if(!cloudConfigured()){const msg='Cloud backup is not configured yet. The app owner must finish the one-time setup.';if(fromGate)setAuthMessage(msg,true);else alert(msg);return false}const c=getCloudConfig();const data=await cloudJsonp(c.url+'?action=ping&key='+encodeURIComponent(c.key)+'&deviceId='+encodeURIComponent(getDeviceId()));if(!data||data.ok!==true)throw new Error(data&&data.error||'Cloud server did not respond');cloudBackupReady=true;updateGoogleStatus();if(!fromGate)showToast('☁️ Cloud backup is connected');return true}catch(e){cloudBackupReady=false;updateGoogleStatus();if(fromGate)setAuthMessage(e.message,true);else alert(e.message);return false}}
+async function connectGoogleAccount(){return testCloudBackup(false)}
+async function googleSignIn(){return testCloudBackup(false)}
+function googleSignOut(){cloudBackupReady=false;updateGoogleStatus();showToast('Cloud backup disconnected on this device')}
+
+
+
+function initAuthGate(){try{authUser=JSON.parse(localStorage.getItem('pgr_auth_session')||'null')}catch(e){authUser=null}if(authUser){$('authGate').classList.remove('show');document.body.classList.remove('auth-locked')}else{document.body.classList.add('auth-locked');$('authGate').classList.add('show');showAuthMode('login')}}
+async function changePin(){const old=localStorage.getItem(PINKEY);if(old){const current=prompt('Enter current PIN:');if((await hash(current||''))!==old){alert('Current PIN is incorrect.');return}}const p=prompt('Set a new PIN (4-8 digits):');if(!/^\d{4,8}$/.test(p||'')){alert('PIN must be 4-8 digits.');return}const confirmPin=prompt('Confirm new PIN:');if(p!==confirmPin){alert('PINs do not match.');return}localStorage.setItem(PINKEY,await hash(p));alert('PIN saved successfully')}
+function lockNow(){if(localStorage.getItem(PINKEY)){$('pinHint').textContent='';$('pinInput').value='';$('pinModal').classList.add('show')}else changePin()}
+async function unlock(){const p=$('pinInput').value;if((await hash(p))===localStorage.getItem(PINKEY)){$('pinModal').classList.remove('show');$('pinInput').value='';$('pinHint').textContent=''}else $('pinHint').textContent='Wrong PIN.'}
+function showPage(page){const isVault=page==='vault',isProducts=page==='products';$('clientPage').classList.toggle('active',!isVault&&!isProducts);$('vaultPage').classList.toggle('active',isVault);$('productsPage').classList.toggle('active',isProducts);$('pageClientBtn').classList.toggle('active',!isVault&&!isProducts);$('pageVaultBtn').classList.toggle('active',isVault);$('pageProductsBtn').classList.toggle('active',isProducts);if(isVault)refreshVault();if(isProducts)renderProducts();window.scrollTo({top:0,behavior:'smooth'})}
+function openQuickMenu(){$('quickModal').classList.add('show')}
+function closeQuickMenu(){$('quickModal').classList.remove('show')}
+function openSettings(){closeQuickMenu();$('settingsModal').classList.add('show');setTimeout(()=>{if($('autoCloudBackup'))$('autoCloudBackup').checked=autoCloudEnabled();updateGoogleStatus();refreshVault();checkForAppUpdate(false)},150)}
+function openMusicSettings(){closeQuickMenu();openSettings();setTimeout(updateMusicButton,0)}
+function openGoogleSettings(){closeQuickMenu();openSettings()}
+function setAutoCloudBackup(enabled){db.settings=db.settings||{};db.settings.autoCloudBackup=!!enabled;try{localStorage.setItem(KEY,JSON.stringify(db))}catch(e){};if(enabled){markCloudPending();scheduleCloudBackup(150);showToast('☁️ Automatic cloud backup ON')}else{clearTimeout(cloudSyncTimer);showToast('Automatic cloud backup OFF')}}
+function saveSettings(){db.settings=db.settings||{};if(typeof db.settings.autoCloudBackup!=='boolean')db.settings.autoCloudBackup=true;persist();showToast(autoCloudEnabled()?'Settings saved — automatic cloud backup is enabled':'Settings saved') }
+function updateGoogleStatus(){const el=$('googleStatus');if(!el)return;const pending=!!localStorage.getItem('pgr_cloud_pending');el.textContent=cloudBackupReady?'✓ Cloud backup connected'+(pending?' • pending sync will retry':''): '☁️ Cloud backup: '+(cloudConfigured()?'Ready — tap Check Connection':'Not configured by app owner');['googleBackupBtn','googleRestoreBtn'].forEach(id=>{const b=$(id);if(b)b.disabled=!cloudBackupReady})}
+async function googleDriveBackup(silent=false){try{if(!cloudBackupReady)await testCloudBackup(false);if(!cloudBackupReady)return false;const payload=await buildBackupPayload();await cloudPost(payload);clearCloudPending();updateGoogleStatus();if(!silent)showToast('☁️ Backup saved to owner Google Drive');return true}catch(e){markCloudPending();if(!silent)alert('Cloud backup failed: '+e.message);return false}}
+async function googleDriveRestore(autoAfterConnect=false){try{if(!cloudBackupReady)await testCloudBackup(false);if(!cloudBackupReady)return false;const c=getCloudConfig();const data=await cloudJsonp(c.url+'?action=restore&key='+encodeURIComponent(c.key)+'&deviceId='+encodeURIComponent(getDeviceId()));if(!data||data.ok!==true)throw new Error(data&&data.error||'No cloud backup found');const x=data.payload,candidate=x&&x.data&&x.data.customers?x.data:x;if(!candidate||!Array.isArray(candidate.customers))throw new Error('Invalid cloud backup');if(autoAfterConnect){const cloudTime=Number(candidate.updatedAt||0),localTime=Number(db.updatedAt||0);if(cloudTime>localTime){if(confirm('A newer cloud backup was found. A safety backup of this device will be saved before restoring. Continue?')){await googleDriveBackup(true);db={customers:candidate.customers,settings:candidate.settings||{},updatedAt:cloudTime};await persist();await restoreVault(x.vault||[]);await restorePhotos(x.photos||[]);if(Array.isArray(x.products))saveProductsLocal(x.products);renderProducts();render();showToast('☁️ Cloud backup restored')}}else if(localTime>cloudTime){await googleDriveBackup(true)}}else{if(!confirm('Restore cloud backup? Current data will be backed up first.'))return false;if(!(await googleDriveBackup(true))){if(!confirm('Safety backup failed. Continue with restore anyway?'))return false}db={customers:candidate.customers,settings:candidate.settings||{},updatedAt:Number(candidate.updatedAt||Date.now())};await persist();await restoreVault(x.vault||[]);await restorePhotos(x.photos||[]);if(Array.isArray(x.products))saveProductsLocal(x.products);renderProducts();render();showToast('☁️ Cloud backup restored')}return true}catch(e){if(!autoAfterConnect)alert('Cloud restore failed: '+e.message);return false}}
+window.addEventListener('online',()=>retryPendingCloudBackup());
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)retryPendingCloudBackup()});
+updateMusicButton();
+initAuthGate();
+render();
+renderPhotoGrid('new');
+loadStoredData();
+refreshVault();
+</script>
+
+<script>
+if ('serviceWorker' in navigator && location.protocol === 'https:') {
+  window.addEventListener('load', async () => {
+    try {
+      const reg = await navigator.serviceWorker.register('./sw.js');
+      if (reg.waiting) reg.waiting.postMessage({type:'SKIP_WAITING'});
+      reg.addEventListener('updatefound', () => {
+        const nw = reg.installing;
+        if (!nw) return;
+        nw.addEventListener('statechange', () => {
+          if (nw.state === 'installed' && navigator.serviceWorker.controller) {
+            showToast('🔄 New app files downloaded — reopen/update from Settings');
+          }
+        });
+      });
+    } catch (e) {}
+  });
+}
+// Quiet background update check: never blocks app startup and never resets user data.
+window.addEventListener('load', () => {
+  setTimeout(() => { try { checkForAppUpdate(false); } catch (e) {} }, 5000);
+});
+</script>
+</body></html>

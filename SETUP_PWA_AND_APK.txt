@@ -1,0 +1,22 @@
+PAK GSM REPAIR UPDATE 3.3 - PWA / APK PLAN
+
+1) Host the contents of this folder on a public HTTPS web host.
+2) Confirm these URLs work from Chrome:
+   /index.html
+   /manifest.json
+   /sw.js
+   /icons/icon-192.png
+   /icons/icon-512.png
+3) Open the public HTTPS app URL in PWABuilder.
+4) Run the PWA checks. Fix any host-specific issue reported by PWABuilder.
+5) Choose Android and configure:
+   App name: Pak GSM Repair Update 3.3
+   Display: Standalone
+   Orientation: Portrait
+   Use a new signing key only for a brand-new app. Keep the same signing key for future updates of the same Android package.
+6) Generate the Android package for testing / Play Store upload.
+
+IMPORTANT
+- Do not lose the Android signing key/keystore. It is required for future updates if you distribute the same app package.
+- The Google Apps Script backend remains separate from the public PWA. Keep its /exec URL in cloud-config.js.
+- Do not expose the cloud key in a public repository if you later redesign the authentication system. The current architecture intentionally embeds the owner key in the client to preserve the existing workflow.
